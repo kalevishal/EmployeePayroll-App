@@ -67,9 +67,9 @@
         <div class="row-content" >
             <label class="label text">Gender</label>
             <div>
-            <input type="radio" id ="male" name="male" value="male" required>
+            <input type="radio" id ="male" name="male" value="male" >
             <label class="text">Male</label>
-            <input type="radio" id ="female" name="female" value="female" required>
+            <input type="radio" id ="female" name="female" value="female" >
             <label class="text">Female</label>
 
         </div>
@@ -96,11 +96,18 @@
             <input class="input" type="range" name="salary" id="salary" min="300000" max="500000" step="100" value="400000">
             <output class="salary-output text" for="salary">400000</output>
           </div>
-          <script>const output = document.querySelector(".salary-output");
+          <script>
+          window.addEventListener('DOMContentLoaded', (event) => {
+          salaryOutput();
+  
+    });
+      function salaryOutput() {
+       const output = document.querySelector(".salary-output");
             const salary = document.querySelector("#salary");
             salary.addEventListener("input", function () {
               output.textContent = salary.value;
             });
+          }
             </script>
             <div class="row-content">
                 <label class="label text" for="notes">Notes:</label>
