@@ -89,3 +89,21 @@ opacity: 1;
     margin-bottom: 10px;
     border: 0px solid green;
 }
+.label{
+    min-width: 100px;
+}
+
+.text{
+    font-size:16px;
+    color:#42515f;
+    opacity: 1;
+    font-family: Roboto;
+}
+.input{
+   width: 100%;
+   padding:12px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   resize: vertical;
+
+}
