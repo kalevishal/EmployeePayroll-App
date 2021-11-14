@@ -2,6 +2,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
    salaryOutput();
    validateName();
    validateDate();
+  // createAndUpdateStorage();
  });
  
  
@@ -67,10 +68,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
    event.stopPropagation();
  
    try {
-       let employeePayrollDate = createEmployeePayroll();
-   } catch (e) {
-       return;
-   }
+     let employeePayrollData = createEmployeePayroll();
+     createAndUpdateStorage(employeePayrollData);
+     alert("Data Stored With name" + employeePayrollData.name);
+ } catch (e) {
+     return;
+ }
  
  }
  
@@ -117,4 +120,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
      }
  });
  return setItems;
+ }
+ function createAndUpdateStorage(employeePayrollData) {
+   let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
+   if (employeePayrollList != undefined) {
+       employeePayrollList.push(employeePayrollData);
+   } else {
+       employeePayrollList=[employeePayrollData];
+   }
+   localStorage.setItem("EmployeePayrollList",JSON.stringify(employeePayrollList));
+ 
  }
