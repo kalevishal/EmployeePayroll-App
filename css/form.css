@@ -171,8 +171,9 @@ select {
     margin-right: 10px;
 }
 error-output {
-    font-size: 15px;
-    font-style: Bold;
+    margin-left: 10px;
+    font-size: 12px;
+    font-style: italic;
     color: red;
 }
 @media only screen and (max-width:600px) {

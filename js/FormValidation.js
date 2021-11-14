@@ -1,61 +1,41 @@
 window.addEventListener('DOMContentLoaded', (event) => {
-  salaryOutput();
-  validateName();
-  validateDate();
-});
-
-
-function salaryOutput() {
-const output = document.querySelector(".salary-output");
-const salary = document.querySelector("#salary");
-salary.addEventListener("input", function () {
-  output.textContent = salary.value;
-});
-
-}
-
-function validateName() {
-
-  let name = document.querySelector('#name');
-  let textError = document.querySelector('.text-error');
-  name.addEventListener('input', function () {
-      let nameRegex = RegExp('^[A-Z]{1}[a-z]{2,}$');
-      if (nameRegex.test(name.value)) {
-          textError.textContent = "";
-      } else {
-          textError.textContent = "Name is incorrect";
-      }
+  const name = document.querySelector('#name');
+  const textError = document.querySelector('.text-error');
+  name.addEventListener('input', function() {
+     if ( name.value.length == 0) {
+        textError.textContent = "";
+        return;
+     }
+     try {
+        (new PersonInfo()).name = name.value;
+        textError.textContent = "";
+     } catch (e) {
+        textError.textContent = e;
+     }
   });
-}
 
-function validateDate() {
-  let day = document.querySelector('#day');
-  let month = document.querySelector('#month');
-  let year = document.querySelector('#year');
-  day.addEventListener('input', checkDate);
-  month.addEventListener('input', checkDate);
-  year.addEventListener('input', checkDate);
-}
+  const salary = document.querySelector('#salary');
+  const output = document.querySelector('.salary-output');
+  output.textContent = salary.value;
+  salary.addEventListener('input', function() {
+     output.textContent = salary.value;
+  });
 
-function checkDate() {
-  let dateError = document.querySelector('.date-error');
-  let date = day.value + " " + month.value + " " + year.value;
-  try {
-      checkStartDate(new Date(Date.parse(date)));
-      dateError.textContent = "";
-  } catch (e) {
-      dateError.textContent = e;
-  }
+  var d = new Date();
+ 
+  d.setHours(0);
+  d.setMinutes(0);
+  d.setSeconds(0);
+ 
+  var userMonth = parseInt(document.getElementById("month").value); 
+  var userDay = parseInt(document.querySelector("#day").value);
+  var userYear = parseInt(document.querySelector("#year").value); 
+  var selectedDate = new Date(userYear, userMonth, userDay);
 
-}
-function checkStartDate(startDate) {
-  let currentDate = new Date();
-  if (startDate > currentDate) {
-      throw "Start date is a future date"
+  if(selectedDate.getTime() >= d.getDate()){ 
+     alert("Sorry,This is future Date ");
   }
-  let difference = Math.abs(currentDate.getTime() - startDate.getTime());
-  let date = difference / (1000 * 60 * 60 * 24);
-  if (date > 30) {
-      throw "Start date is beyond 30 days";
+  else { 
+     (new PersonInfo()).start_date = selectedDate.value;        
   }
-}
+});
